@@ -97,58 +97,94 @@ local ScreenGui = Instance.new("ScreenGui")
 pcall(function() ScreenGui.Parent = game.CoreGui end)
 
 local Frame = Instance.new("Frame", ScreenGui)
-Frame.Size = UDim2.new(0, 240, 0, 180)
-Frame.Position = UDim2.new(0.5, -120, 0.5, -90)
-Frame.BackgroundColor3 = Color3.fromRGB(25,25,25)
+Frame.Size = UDim2.new(0, 250, 0, 190)
+Frame.Position = UDim2.new(0.5, -125, 0.5, -95)
+Frame.BackgroundColor3 = Color3.fromRGB(20,20,20)
 Frame.Active = true
 Frame.Draggable = true
 Frame.BorderSizePixel = 0
 Instance.new("UICorner", Frame)
 
+-- 🔥 UIStroke RGB em todos elementos
+local function ApplyRGBStroke(obj)
+    local stroke = Instance.new("UIStroke")
+    stroke.Thickness = 2
+    stroke.Parent = obj
+
+    task.spawn(function()
+        while true do
+            for i = 0, 1, 0.01 do
+                stroke.Color = Color3.fromHSV(i, 1, 1)
+                task.wait(0.03)
+            end
+        end
+    end)
+end
+
+-- aplica em tudo
+ApplyRGBStroke(Frame)
+ApplyRGBStroke(Button)
+ApplyRGBStroke(Plus)
+ApplyRGBStroke(Minus)
+
+-- TÍTULO
 local Title = Instance.new("TextLabel", Frame)
-Title.Size = UDim2.new(1, 0, 0, 30)
+Title.Size = UDim2.new(1, -10, 0, 30)
+Title.Position = UDim2.new(0, 10, 0, 0)
 Title.Text = "AUTO AIM PRO"
-Title.TextColor3 = Color3.new(1,1,1)
+Title.TextColor3 = Color3.fromRGB(255,255,255)
 Title.BackgroundTransparency = 1
 Title.Font = Enum.Font.GothamBold
-Title.TextSize = 16
+Title.TextSize = 17
+Title.TextXAlignment = Enum.TextXAlignment.Left
 
+-- BOTÃO
 local Button = Instance.new("TextButton", Frame)
-Button.Size = UDim2.new(0.9, 0, 0, 50)
-Button.Position = UDim2.new(0.05, 0, 0.3, 0)
+Button.Size = UDim2.new(0.88, 0, 0, 50)
+Button.Position = UDim2.new(0.06, 0, 0.28, 0)
 Button.Text = "DESATIVADO"
 Button.TextColor3 = Color3.new(1,1,1)
-Button.BackgroundColor3 = Color3.fromRGB(40,40,40)
+Button.BackgroundColor3 = Color3.fromRGB(35,35,35)
 Button.Font = Enum.Font.GothamBold
 Button.TextSize = 14
 Instance.new("UICorner", Button)
 
+-- SOMBRA FAKE
+local Stroke = Instance.new("UIStroke", Button)
+Stroke.Color = Color3.fromRGB(60,60,60)
+Stroke.Thickness = 1
+
 -- TEXTO SPAM
 local SpamText = Instance.new("TextLabel", Frame)
-SpamText.Size = UDim2.new(1, 0, 0, 25)
-SpamText.Position = UDim2.new(0, 0, 0.65, 0)
+SpamText.Size = UDim2.new(1, -10, 0, 25)
+SpamText.Position = UDim2.new(0, 10, 0.63, 0)
 SpamText.Text = "SPAM: "..SPAM_RATE
-SpamText.TextColor3 = Color3.new(1,1,1)
+SpamText.TextColor3 = Color3.fromRGB(200,200,200)
 SpamText.BackgroundTransparency = 1
 SpamText.Font = Enum.Font.GothamBold
 SpamText.TextSize = 14
+SpamText.TextXAlignment = Enum.TextXAlignment.Left
 
--- +
+-- BOTÃO +
 local Plus = Instance.new("TextButton", Frame)
-Plus.Size = UDim2.new(0.4, 0, 0, 30)
+Plus.Size = UDim2.new(0.4, 0, 0, 32)
 Plus.Position = UDim2.new(0.55, 0, 0.8, 0)
 Plus.Text = "+"
 Plus.TextColor3 = Color3.new(1,1,1)
-Plus.BackgroundColor3 = Color3.fromRGB(0,170,0)
+Plus.BackgroundColor3 = Color3.fromRGB(0,170,100)
+Plus.Font = Enum.Font.GothamBold
+Plus.TextSize = 18
 Instance.new("UICorner", Plus)
 
--- -
+-- BOTÃO -
 local Minus = Instance.new("TextButton", Frame)
-Minus.Size = UDim2.new(0.4, 0, 0, 30)
+Minus.Size = UDim2.new(0.4, 0, 0, 32)
 Minus.Position = UDim2.new(0.05, 0, 0.8, 0)
 Minus.Text = "-"
 Minus.TextColor3 = Color3.new(1,1,1)
-Minus.BackgroundColor3 = Color3.fromRGB(170,0,0)
+Minus.BackgroundColor3 = Color3.fromRGB(170,50,50)
+Minus.Font = Enum.Font.GothamBold
+Minus.TextSize = 18
 Instance.new("UICorner", Minus)
 
 Plus.MouseButton1Click:Connect(function()
