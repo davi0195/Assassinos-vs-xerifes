@@ -1,1 +1,0 @@
-# Assassinos-vs-xerifes
