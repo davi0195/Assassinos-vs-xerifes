@@ -201,77 +201,7 @@ SPAM_RATE = SPAM_RATE - 1
 SpamText.Text = "SPAM: "..SPAM_RATE
 end
 end)
--- 🔥 HITBOX
-local HitboxAtivo = false
-local HITBOX_SIZE = 5
 
--- TEXTO HITBOX
-local HitboxText = Instance.new("TextLabel", Frame)
-HitboxText.Size = UDim2.new(1, -10, 0, 25)
-HitboxText.Position = UDim2.new(0, 10, 0.52, 0)
-HitboxText.Text = "HITBOX: "..HITBOX_SIZE
-HitboxText.TextColor3 = Color3.fromRGB(200,200,200)
-HitboxText.BackgroundTransparency = 1
-HitboxText.Font = Enum.Font.GothamBold
-HitboxText.TextSize = 14
-HitboxText.TextXAlignment = Enum.TextXAlignment.Left
-
--- BOTÃO HITBOX
-local HitboxButton = Instance.new("TextButton", Frame)
-HitboxButton.Size = UDim2.new(0.88, 0, 0, 40)
-HitboxButton.Position = UDim2.new(0.06, 0, 0.45, 0)
-HitboxButton.Text = "HITBOX OFF"
-HitboxButton.TextColor3 = Color3.new(1,1,1)
-HitboxButton.BackgroundColor3 = Color3.fromRGB(40,40,40)
-HitboxButton.Font = Enum.Font.GothamBold
-HitboxButton.TextSize = 14
-Instance.new("UICorner", HitboxButton)
-
--- BOTÃO +
-local HitboxPlus = Instance.new("TextButton", Frame)
-HitboxPlus.Size = UDim2.new(0.4, 0, 0, 32)
-HitboxPlus.Position = UDim2.new(0.55, 0, 0.68, 0)
-HitboxPlus.Text = "+"
-HitboxPlus.TextColor3 = Color3.new(1,1,1)
-HitboxPlus.BackgroundColor3 = Color3.fromRGB(0,170,100)
-HitboxPlus.Font = Enum.Font.GothamBold
-HitboxPlus.TextSize = 18
-Instance.new("UICorner", HitboxPlus)
-
--- BOTÃO -
-local HitboxMinus = Instance.new("TextButton", Frame)
-HitboxMinus.Size = UDim2.new(0.4, 0, 0, 32)
-HitboxMinus.Position = UDim2.new(0.05, 0, 0.68, 0)
-HitboxMinus.Text = "-"
-HitboxMinus.TextColor3 = Color3.new(1,1,1)
-HitboxMinus.BackgroundColor3 = Color3.fromRGB(170,50,50)
-HitboxMinus.Font = Enum.Font.GothamBold
-HitboxMinus.TextSize = 18
-Instance.new("UICorner", HitboxMinus)
-HitboxPlus.MouseButton1Click:Connect(function()
-HITBOX_SIZE = HITBOX_SIZE + 1
-HitboxText.Text = "HITBOX: "..HITBOX_SIZE
-end)
-
-HitboxMinus.MouseButton1Click:Connect(function()
-if HITBOX_SIZE > 2 then
-HITBOX_SIZE = HITBOX_SIZE - 1
-HitboxText.Text = "HITBOX: "..HITBOX_SIZE
-end
-end)
-
-HitboxButton.MouseButton1Click:Connect(function()
-HitboxAtivo = not HitboxAtivo
-
-if HitboxAtivo then  
-    HitboxButton.Text = "HITBOX ON"  
-    HitboxButton.BackgroundColor3 = Color3.fromRGB(0,170,0)  
-else  
-    HitboxButton.Text = "HITBOX OFF"  
-    HitboxButton.BackgroundColor3 = Color3.fromRGB(40,40,40)  
-end
-
-end)
 -- BOTÃO
 Button.MouseButton1Click:Connect(function()
 Ativo = not Ativo
@@ -287,26 +217,7 @@ end
 end)
 
 -- LOOP
-RunService.Heartbeat:Connect(function() -- HITBOX LOOP
-if HitboxAtivo then
-for _, player in pairs(Players:GetPlayers()) do
-if player ~= LocalPlayer and player.Character then
-
-local char = player.Character  
-        local hrp = char:FindFirstChild("HumanoidRootPart")  
-        local hum = char:FindFirstChild("Humanoid")  
-
-        if hrp and hum and hum.Health > 0 then  
-            hrp.Size = Vector3.new(HITBOX_SIZE, HITBOX_SIZE, HITBOX_SIZE)  
-            hrp.Transparency = 0.5  
-            hrp.BrickColor = BrickColor.new("Really red")  
-            hrp.Material = Enum.Material.Neon  
-            hrp.CanCollide = false  
-        end  
-    end  
-end
-
-end
+RunService.Heartbeat:Connect(function()
 if not Ativo then return end
 
 EquipItems()  
@@ -345,4 +256,4 @@ for i = 1, SPAM_RATE do
     ThrowHit:FireServer(hitPart, destino)  
 end
 
-end) assim?
+end)
